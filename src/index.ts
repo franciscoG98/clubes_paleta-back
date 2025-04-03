@@ -4,6 +4,7 @@ import canchaRoutes from './routes/canchas';
 import pendingCanchaRoutes from './routes/pendingCancha';
 import bodyParser from 'body-parser';
 import cors from "cors";
+import 'dotenv/config'
 
 const app = express();
 
