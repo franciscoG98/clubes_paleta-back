@@ -1,11 +1,11 @@
 import { Sequelize } from 'sequelize';
 import { initCanchaModel, Cancha } from './cancha';
 import { initPendingCanchaModel, PendingCancha } from './pendingCancha';
+import 'dotenv/config'
 
-// const sequelize = new Sequelize('postgres://postgres:1234@localhost:5432/canchas', {
 const sequelize = new Sequelize(process.env.PSQL_CONNECTION_STRING as string, {
-  dialect: "postgres"
-})
+  dialect: 'postgres',
+});
 
 // check conection
 sequelize.authenticate().then(() => {
