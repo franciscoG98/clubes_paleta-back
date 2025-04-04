@@ -9,7 +9,8 @@ import 'dotenv/config'
 const app = express();
 
 const corsOptions = {
-  origin: [process.env.CLIENT_BASE_URL || 'http://localhost:3000', 'http://localhost:3001', 'https://www.getpostman.com'],
+  origin: '*',
+  // origin: [process.env.CLIENT_BASE_URL || 'http://localhost:3000', 'http://localhost:3001', 'https://www.getpostman.com'],
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   // Allow cookies, if your application uses them
   credentials: true,
