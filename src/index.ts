@@ -6,16 +6,19 @@ import bodyParser from 'body-parser';
 import cors from "cors";
 import 'dotenv/config'
 
+import swaggerJSDoc from 'swagger-jsdoc';
+import { serve, setup } from 'swagger-ui-express';
+import { options } from './swaggerOptions'
+
 const app = express();
 
 const corsOptions = {
+  // TODO: change origins
   origin: '*',
   // origin: [process.env.CLIENT_BASE_URL || 'http://localhost:3000', 'http://localhost:3001', 'https://www.getpostman.com'],
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-  // Allow cookies, if your application uses them
   credentials: true,
   optionsSuccessStatus: 204, 
-  // headers: 'Content-Type, Authorization, Content-Length, X-Requested-With',
 };
 
 app.use(cors(corsOptions)); 
@@ -31,11 +34,15 @@ app.use('/uploads', express.static('uploads'));
 // TODO: port on env
 const PORT = process.env.PORT || 3001;
 
+// routes
 app.get('/', (req: Request, res: Response) => {
   res.send('Hello my pelotari friend!');
 });
 app.use('/canchas', canchaRoutes);
 app.use('/pending-canchas', pendingCanchaRoutes);
+
+const specs = swaggerJSDoc(options)
+app.use('/docs', serve, setup(specs))
 
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   console.error(err.stack);
