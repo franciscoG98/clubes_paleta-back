@@ -5,6 +5,7 @@ import pendingCanchaRoutes from './routes/pendingCancha';
 import bodyParser from 'body-parser';
 import cors from "cors";
 import 'dotenv/config'
+import path from 'path';
 
 import swaggerJSDoc from 'swagger-jsdoc';
 import { serve, setup } from 'swagger-ui-express';
@@ -28,7 +29,8 @@ app.use(express.json());
 app.disable('x-powered-by')
 
 // TODO: imagenes canchas
-app.use('/uploads', express.static('uploads'));
+// app.use('/uploads', express.static('uploads'));
+app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
 
 
 // TODO: port on env
