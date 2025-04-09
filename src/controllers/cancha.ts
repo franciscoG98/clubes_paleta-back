@@ -100,14 +100,14 @@ export const deleteCancha: Handler = async (req, res) => {
       return;
     }
 
-    res.status(204).json({ message : 'Cancha deleted' });
+    res.status(204).json({ message : 'Cancha successfully deleted' });
   } catch (error) {
     console.error(error);
     res.status(500).send('Error fetching cancha');
   }
 }
 
-// TODO
+// TODO: updateCancha
 // export const updateCancha: Handler = async (req, res) => {
 //   try {
 //     const { id } = req.params;

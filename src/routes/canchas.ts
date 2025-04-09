@@ -199,7 +199,7 @@ router.get('/:id', getOneCancha);
  *          - $ref: '#/components/parameters/canchaId'
  *      responses:
  *        204:
- *          description: requested cancha
+ *          description: deleted cancha
  *          content:
  *            application/json:
  *              schema:
