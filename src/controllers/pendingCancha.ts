@@ -41,7 +41,7 @@ export const getAllPendingCanchas: Handler = async (req, res) => {
 }
 
 export const createPendingCancha: Handler = async (req, res) => {
-  const { club, city, state, type, maps_location, phone } = req.body;
+  const { club, city, state, type, maps_location, phone, address } = req.body;
 
   // Si no se subió archivo y no hay imagen en el body, usar la imagen por defecto
   const image = req.file ? `/uploads/${req.file.filename}` : DEFAULT_IMAGE_PATH;
@@ -54,7 +54,8 @@ export const createPendingCancha: Handler = async (req, res) => {
       type,
       maps_location,
       phone,
-      image
+      image,
+      address
     });
 
     res.status(201).json(newPendingCancha);
