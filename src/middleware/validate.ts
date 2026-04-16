@@ -27,6 +27,12 @@ export const canchaValidationRules = [
     .withMessage('El teléfono es obligatorio.')
     .matches(/^\d{8,15}$/)
     .withMessage('El teléfono debe tener entre 8 y 15 dígitos.'),
+  body('address')
+    .trim()
+    .notEmpty()
+    .withMessage('La dirección es obligatoria.')
+    .isLength({ min: 3 })
+    .withMessage('La dirección debe tener al menos 3 caracteres.'),
 ];
 
 export const canchaUpdateValidationRules = [
@@ -42,4 +48,10 @@ export const canchaUpdateValidationRules = [
     .optional()
     .matches(/^\d{8,15}$/)
     .withMessage('El teléfono debe tener entre 8 y 15 dígitos.'),
+  body('address')
+    .trim()
+    .notEmpty()
+    .withMessage('La dirección es obligatoria.')
+    .isLength({ min: 3 })
+    .withMessage('La dirección debe tener al menos 3 caracteres.'),
 ];

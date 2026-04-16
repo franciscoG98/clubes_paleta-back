@@ -11,6 +11,7 @@ export class Cancha extends Model {
   public phone!: string;
   // TODO: type image url???
   public image!: string;
+  public address!: string | null;
 }
 
 export const initCanchaModel = (sequelize: Sequelize) => {
@@ -45,6 +46,10 @@ export const initCanchaModel = (sequelize: Sequelize) => {
       allowNull: false,
     },
     image: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    address: {
       type: DataTypes.STRING,
       allowNull: false,
     },

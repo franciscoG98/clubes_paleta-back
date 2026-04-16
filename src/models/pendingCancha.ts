@@ -11,6 +11,7 @@ export class PendingCancha extends Model {
   public phone!: string;
   // TODO: type image url???
   public image!: string;
+  public address!: string | null;
 }
 
 export const initPendingCanchaModel = (sequelize: Sequelize) => {
@@ -48,6 +49,10 @@ export const initPendingCanchaModel = (sequelize: Sequelize) => {
       type: DataTypes.STRING,
       // allowNull: false,
       allowNull: true,
+    },
+    address: {
+      type: DataTypes.STRING,
+      allowNull: false,
     },
     pending: {
       type: DataTypes.BOOLEAN,

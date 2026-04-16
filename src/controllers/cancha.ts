@@ -45,7 +45,7 @@ export const getCanchasCount: Handler = async (req, res) => {
 
 // TODO: nanoid to create random uniques ids
 export const createCancha: Handler = async (req, res) => {
-  const { club, city, state, type, maps_location, phone } = req.body;
+  const { club, city, state, type, maps_location, phone, address } = req.body;
   let { image } = req.body;
 
   if (!image) image = '/uploads/cancha_default.webp';
@@ -58,7 +58,8 @@ export const createCancha: Handler = async (req, res) => {
       type,
       maps_location,
       phone,
-      image
+      image,
+      address
     });
 
     res.status(201).json(newCancha);
