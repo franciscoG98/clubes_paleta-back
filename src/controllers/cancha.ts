@@ -1,6 +1,5 @@
 import { Handler } from 'express';
 import db from '../models';
-import path from 'path';
 
 interface Filter {
   city?: string;
@@ -48,10 +47,8 @@ export const getCanchasCount: Handler = async (req, res) => {
 export const createCancha: Handler = async (req, res) => {
   const { club, city, state, type, maps_location, phone } = req.body;
   let { image } = req.body;
-  
-  const defaultImage = path.join(__dirname, '../../uploads/cancha_default.webp');
 
-  image ? '' : image = defaultImage;
+  if (!image) image = '/uploads/cancha_default.webp';
 
   try {
     const newCancha = await Cancha.create({
@@ -107,24 +104,23 @@ export const deleteCancha: Handler = async (req, res) => {
   }
 }
 
-// TODO: updateCancha
-// export const updateCancha: Handler = async (req, res) => {
-//   try {
-//     const { id } = req.params;
-//     const updateData = req.body;
+export const updateCancha: Handler = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const updateData = req.body;
 
-//     const canchaToEdit = await Cancha.findByPk(id);
+    const canchaToEdit = await Cancha.findByPk(id);
 
-//     if (!canchaToEdit) {
-//       res.status(404).json({ message: 'Cancha not found' });
-//       return;
-//     }
+    if (!canchaToEdit) {
+      res.status(404).json({ message: 'Cancha not found' });
+      return;
+    }
 
-//     await canchaToEdit.update(updateData)
+    await canchaToEdit.update(updateData);
 
-//     res.status(204).json(canchaToEdit);
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).send('Error fetching cancha');
-//   }
-// }
+    res.status(200).json(canchaToEdit);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Error updating cancha');
+  }
+}

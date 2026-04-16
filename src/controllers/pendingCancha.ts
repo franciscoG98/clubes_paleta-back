@@ -72,6 +72,7 @@ export const approvePendingCancha: Handler = async (req, res) => {
 
     if (!pendingCancha) {
       res.status(404).json({ message: "Pending cancha not found" })
+      return;
     }
 
     // Parse and clean

@@ -1,20 +1,9 @@
-import { Router } from 'express';
-import {
-    getAllCanchas,
-    createCancha,
-    getOneCancha,
-    deleteCancha,
-    getCanchasCount,
-    updateCancha,
-} from '../controllers/cancha';
-import {
-    canchaValidationRules,
-    canchaUpdateValidationRules,
-    handleValidationErrors,
-} from '../middleware/validate';
-
-const router = Router();
-
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const cancha_1 = require("../controllers/cancha");
+const validate_1 = require("../middleware/validate");
+const router = (0, express_1.Router)();
 /**
  *  @swagger
  *    components:
@@ -76,19 +65,17 @@ const router = Router();
  *              in: path
  *              name: id
  *              required: true
- *              schema: 
- *                  type: string 
+ *              schema:
+ *                  type: string
  *              description: the cancha id
- * 
+ *
 */
-
 /**
  * @swagger
  *  tags:
  *      name: Canchas
  *      description: Canchas endpoint
  */
-
 /**
  * @swagger
  * /canchas:
@@ -111,8 +98,7 @@ const router = Router();
  *             schema:
  *               $ref: '#/components/schemas/CanchaNotFound'
  */
-router.get('/', getAllCanchas);
-
+router.get('/', cancha_1.getAllCanchas);
 /**
  * @swagger
  * /canchas/count:
@@ -134,8 +120,7 @@ router.get('/', getAllCanchas);
  *             schema:
  *               $ref: '#/components/schemas/CanchaNotFound'
  */
-router.get('/count', getCanchasCount);
-
+router.get('/count', cancha_1.getCanchasCount);
 /**
 * @swagger
 *   /canchas:
@@ -162,8 +147,7 @@ router.get('/count', getCanchasCount);
 *                 schema:
 *                   $ref: '#/components/schemas/CanchaNotFound'
 */
-router.post('/', canchaValidationRules, handleValidationErrors, createCancha)
-
+router.post('/', validate_1.canchaValidationRules, validate_1.handleValidationErrors, cancha_1.createCancha);
 /**
  * @swagger
  * /canchas/{id}:
@@ -192,8 +176,7 @@ router.post('/', canchaValidationRules, handleValidationErrors, createCancha)
  *              schema:
  *                $ref: '#/components/schemas/CanchaNotFound'
  */
-router.get('/:id', getOneCancha);
-
+router.get('/:id', cancha_1.getOneCancha);
 // TODO:204 message response
 /**
  * @swagger
@@ -227,8 +210,7 @@ router.get('/:id', getOneCancha);
  *              schema:
  *                $ref: '#/components/schemas/CanchaNotFound'
  */
-router.delete('/:id', deleteCancha);
-
+router.delete('/:id', cancha_1.deleteCancha);
 /**
  * @swagger
  * /canchas/{id}:
@@ -263,6 +245,5 @@ router.delete('/:id', deleteCancha);
  *              schema:
  *                $ref: '#/components/schemas/CanchaNotFound'
  */
-router.patch('/:id', canchaUpdateValidationRules, handleValidationErrors, updateCancha);
-
-export default router;
+router.patch('/:id', validate_1.canchaUpdateValidationRules, validate_1.handleValidationErrors, cancha_1.updateCancha);
+exports.default = router;
