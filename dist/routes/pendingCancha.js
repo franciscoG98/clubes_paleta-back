@@ -1,19 +1,9 @@
-import { Router } from 'express';
-import {
-    getAllPendingCanchas,
-    createPendingCancha,
-    approvePendingCancha,
-    updatePendingCancha,
-    deletePendingCancha,
-    uploadMiddleware
-} from "../controllers/pendingCancha"
-import {
-    canchaValidationRules,
-    handleValidationErrors,
-} from '../middleware/validate';
-
-const router = Router();
-
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const pendingCancha_1 = require("../controllers/pendingCancha");
+const validate_1 = require("../middleware/validate");
+const router = (0, express_1.Router)();
 /**
  *  @swagger
  *    components:
@@ -80,19 +70,17 @@ const router = Router();
  *              in: path
  *              name: id
  *              required: true
- *              schema: 
- *                  type: string 
+ *              schema:
+ *                  type: string
  *              description: the pending cancha id
- * 
+ *
 */
-
 /**
  * @swagger
  *  tags:
  *      name: Pending Canchas
  *      description: Pending Canchas endpoint
  */
-
 /**
  * @swagger
  * /pending-canchas:
@@ -115,8 +103,7 @@ const router = Router();
  *             schema:
  *               $ref: '#/components/schemas/CanchaNotFound'
  */
-router.get('/', getAllPendingCanchas);
-
+router.get('/', pendingCancha_1.getAllPendingCanchas);
 /**
 * @swagger
 *   /pending-canchas:
@@ -143,8 +130,7 @@ router.get('/', getAllPendingCanchas);
 *                 schema:
 *                   $ref: '#/components/schemas/CanchaNotFound'
 */
-router.post("/", uploadMiddleware, canchaValidationRules, handleValidationErrors, createPendingCancha);
-
+router.post("/", pendingCancha_1.uploadMiddleware, validate_1.canchaValidationRules, validate_1.handleValidationErrors, pendingCancha_1.createPendingCancha);
 /**
 * @swagger
 *   /pending-canchas/approve-cancha/{id}:
@@ -173,11 +159,9 @@ router.post("/", uploadMiddleware, canchaValidationRules, handleValidationErrors
 *               schema:
 *                 $ref: '#/components/schemas/CanchaNotFound'
 */
-router.post('/approve-cancha/:id', approvePendingCancha)
-
+router.post('/approve-cancha/:id', pendingCancha_1.approvePendingCancha);
 // TODO: not implemented on client
-router.put('/:id', updatePendingCancha);
-
+router.put('/:id', pendingCancha_1.updatePendingCancha);
 /**
  * @swagger
  * /pending-canchas/{id}:
@@ -210,6 +194,5 @@ router.put('/:id', updatePendingCancha);
  *              schema:
  *                $ref: '#/components/schemas/CanchaNotFound'
  */
-router.delete('/:id', deletePendingCancha)
-
-export default router;
+router.delete('/:id', pendingCancha_1.deletePendingCancha);
+exports.default = router;

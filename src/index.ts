@@ -10,19 +10,12 @@ import path from 'path';
 import swaggerJSDoc from 'swagger-jsdoc';
 import { serve, setup } from 'swagger-ui-express';
 import { options } from './swaggerOptions'
+import { buildCorsAllowlist, createCorsOptions } from './corsOptions';
 
 const app = express();
 
-const corsOptions = {
-  // TODO: change origins
-  origin: '*',
-  // origin: [process.env.CLIENT_BASE_URL || 'http://localhost:3000', 'http://localhost:3001', 'https://www.getpostman.com'],
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-  credentials: true,
-  optionsSuccessStatus: 204, 
-};
-
-app.use(cors(corsOptions)); 
+const corsAllowlist = buildCorsAllowlist();
+app.use(cors(createCorsOptions(corsAllowlist))); 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
