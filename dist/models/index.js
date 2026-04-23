@@ -5,14 +5,14 @@ const cancha_1 = require("./cancha");
 const pendingCancha_1 = require("./pendingCancha");
 require("dotenv/config");
 const sequelize = new sequelize_1.Sequelize(process.env.PSQL_CONNECTION_STRING, {
-    dialect: 'postgres',
+    dialect: "postgres",
 });
 // check conection
 sequelize.authenticate().then(() => {
     console.log(`Database connected to canchas`);
     // TODO: type error
 }).catch((err) => {
-    console.log('Connection error: ', err);
+    console.log("Connection error: ", err);
 });
 (0, cancha_1.initCanchaModel)(sequelize);
 (0, pendingCancha_1.initPendingCanchaModel)(sequelize);

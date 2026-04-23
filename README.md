@@ -12,7 +12,7 @@ API en Express + Sequelize para canchas de paleta.
 El proyecto usa PostgreSQL. Crea una base vacía y un usuario con permisos (como superusuario de Postgres, por ejemplo `psql -U postgres`):
 
 ```sql
-CREATE USER canchas_user WITH PASSWORD 'elige_una_contraseña';
+CREATE USER canchas_user WITH PASSWORD "elige_una_contraseña";
 CREATE DATABASE canchas_de_paleta OWNER canchas_user;
 ```
 

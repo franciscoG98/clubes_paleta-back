@@ -21,33 +21,33 @@ app.use((0, cors_1.default)((0, corsOptions_1.createCorsOptions)(corsAllowlist))
 app.use(body_parser_1.default.json());
 app.use(body_parser_1.default.urlencoded({ extended: true }));
 app.use(express_1.default.json());
-app.disable('x-powered-by');
+app.disable("x-powered-by");
 // TODO: imagenes canchas
-// app.use('/uploads', express.static('uploads'));
-app.use('/uploads', express_1.default.static(path_1.default.join(__dirname, '../uploads')));
+// app.use("/uploads", express.static("uploads"));
+app.use("/uploads", express_1.default.static(path_1.default.join(__dirname, "../uploads")));
 // TODO: port on env
 const PORT = process.env.PORT || 3001;
 // routes
-app.get('/', (req, res) => {
-    res.send('Hello my pelotari friend!');
+app.get("/", (req, res) => {
+    res.send("Hello my pelotari friend!");
 });
-app.use('/canchas', canchas_1.default);
-app.use('/pending-canchas', pendingCancha_1.default);
+app.use("/canchas", canchas_1.default);
+app.use("/pending-canchas", pendingCancha_1.default);
 const specs = (0, swagger_jsdoc_1.default)(swaggerOptions_1.options);
-app.use('/docs', swagger_ui_express_1.serve, (0, swagger_ui_express_1.setup)(specs));
+app.use("/docs", swagger_ui_express_1.serve, (0, swagger_ui_express_1.setup)(specs));
 app.use((err, req, res, next) => {
     console.error(err.stack);
-    res.status(500).send('Something went wrong');
+    res.status(500).send("Something went wrong");
 });
 // db sync
 const syncDatabase = async () => {
     try {
         // await (db as any).sequelize.sync({ force: true });
         await models_1.default.sequelize.sync({ force: false });
-        console.log('\nDatabase successfully synchronized.');
+        console.log("\nDatabase successfully synchronized.");
     }
     catch (error) {
-        console.error('Error synchronizing the database:', error);
+        console.error("Error synchronizing the database:", error);
     }
 };
 // sync db and after start server

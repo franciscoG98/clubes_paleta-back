@@ -1,4 +1,4 @@
-import { Router } from 'express';
+import { Router } from "express";
 import {
     getAllPendingCanchas,
     createPendingCancha,
@@ -10,7 +10,7 @@ import {
 import {
     canchaValidationRules,
     handleValidationErrors,
-} from '../middleware/validate';
+} from "../middleware/validate";
 
 const router = Router();
 
@@ -107,15 +107,15 @@ const router = Router();
  *             schema:
  *               type: array
  *               items:
- *                  $ref: '#/components/schemas/PendingCancha'
+ *                  $ref: "#/components/schemas/PendingCancha"
  *       500:
  *         description: No hay canchas
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/CanchaNotFound'
+ *               $ref: "#/components/schemas/CanchaNotFound"
  */
-router.get('/', getAllPendingCanchas);
+router.get("/", getAllPendingCanchas);
 
 /**
 * @swagger
@@ -128,20 +128,20 @@ router.get('/', getAllPendingCanchas);
 *         content:
 *           application/json:
 *             schema:
-*               $ref: '#/components/schemas/Cancha'
+*               $ref: "#/components/schemas/Cancha"
 *         responses:
 *           201:
 *             description: the task was succesfully created
 *             content:
 *               application/json:
 *                 schema:
-*                   $ref: '#/components/schemas/PendingCancha'
+*                   $ref: "#/components/schemas/PendingCancha"
 *           500:
 *             description: some server error
 *             content:
 *               application/json:
 *                 schema:
-*                   $ref: '#/components/schemas/CanchaNotFound'
+*                   $ref: "#/components/schemas/CanchaNotFound"
 */
 router.post("/", uploadMiddleware, canchaValidationRules, handleValidationErrors, createPendingCancha);
 
@@ -152,31 +152,31 @@ router.post("/", uploadMiddleware, canchaValidationRules, handleValidationErrors
 *       summary: Approve a pending cancha and create a Cancha from it
 *       tags: [Pending Canchas]
 *       parameters:
-*         - $ref: '#/components/parameters/pendingCanchaId'
+*         - $ref: "#/components/parameters/pendingCanchaId"
 *       responses:
 *         200:
 *           description: the task was succesfully created
 *           content:
 *             application/json:
 *               schema:
-*                 $ref: '#/components/schemas/PendingCancha'
+*                 $ref: "#/components/schemas/PendingCancha"
 *         404:
 *             description: the cancha to approve was not found
 *             content:
 *               application/json:
 *                 schema:
-*                   $ref: '#/components/schemas/CanchaNotFound'
+*                   $ref: "#/components/schemas/CanchaNotFound"
 *         500:
 *           description: some server error
 *           content:
 *             application/json:
 *               schema:
-*                 $ref: '#/components/schemas/CanchaNotFound'
+*                 $ref: "#/components/schemas/CanchaNotFound"
 */
-router.post('/approve-cancha/:id', approvePendingCancha)
+router.post("/approve-cancha/:id", approvePendingCancha)
 
 // TODO: not implemented on client
-router.put('/:id', updatePendingCancha);
+router.put("/:id", updatePendingCancha);
 
 /**
  * @swagger
@@ -185,7 +185,7 @@ router.put('/:id', updatePendingCancha);
  *      summary: Delete pending cancha by id
  *      tags: [Pending Canchas]
  *      parameters:
- *          - $ref: '#/components/parameters/pendingCanchaId'
+ *          - $ref: "#/components/parameters/pendingCanchaId"
  *      responses:
  *        204:
  *          description: deleted pending cancha
@@ -196,20 +196,20 @@ router.put('/:id', updatePendingCancha);
  *                  properties:
  *                      message:
  *                          type: string
- *                          value: 'Pending cancha deleted'
+ *                          value: "Pending cancha deleted"
  *        404:
  *          description: No se encontro la cancha
  *          content:
  *            application/json:
  *              schema:
- *                  $ref: '#/components/schemas/CanchaNotFound'
+ *                  $ref: "#/components/schemas/CanchaNotFound"
  *        500:
  *          description: No hay canchas
  *          content:
  *            application/json:
  *              schema:
- *                $ref: '#/components/schemas/CanchaNotFound'
+ *                $ref: "#/components/schemas/CanchaNotFound"
  */
-router.delete('/:id', deletePendingCancha)
+router.delete("/:id", deletePendingCancha)
 
 export default router;

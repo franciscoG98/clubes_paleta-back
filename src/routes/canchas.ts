@@ -1,4 +1,4 @@
-import { Router } from 'express';
+import { Router } from "express";
 import {
     getAllCanchas,
     createCancha,
@@ -6,12 +6,12 @@ import {
     deleteCancha,
     getCanchasCount,
     updateCancha,
-} from '../controllers/cancha';
+} from "../controllers/cancha";
 import {
     canchaValidationRules,
     canchaUpdateValidationRules,
     handleValidationErrors,
-} from '../middleware/validate';
+} from "../middleware/validate";
 
 const router = Router();
 
@@ -103,15 +103,15 @@ const router = Router();
  *             schema:
  *               type: array
  *               items:
- *                  $ref: '#/components/schemas/Cancha'
+ *                  $ref: "#/components/schemas/Cancha"
  *       500:
  *         description: No hay canchas
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/CanchaNotFound'
+ *               $ref: "#/components/schemas/CanchaNotFound"
  */
-router.get('/', getAllCanchas);
+router.get("/", getAllCanchas);
 
 /**
  * @swagger
@@ -132,9 +132,9 @@ router.get('/', getAllCanchas);
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/CanchaNotFound'
+ *               $ref: "#/components/schemas/CanchaNotFound"
  */
-router.get('/count', getCanchasCount);
+router.get("/count", getCanchasCount);
 
 /**
 * @swagger
@@ -147,22 +147,22 @@ router.get('/count', getCanchasCount);
 *         content:
 *           application/json:
 *             schema:
-*               $ref: '#/components/schemas/Cancha'
+*               $ref: "#/components/schemas/Cancha"
 *         responses:
 *           201:
 *             description: the task was succesfully created
 *             content:
 *               application/json:
 *                 schema:
-*                   $ref: '#/components/schemas/Cancha'
+*                   $ref: "#/components/schemas/Cancha"
 *           500:
 *             description: some server error
 *             content:
 *               application/json:
 *                 schema:
-*                   $ref: '#/components/schemas/CanchaNotFound'
+*                   $ref: "#/components/schemas/CanchaNotFound"
 */
-router.post('/', canchaValidationRules, handleValidationErrors, createCancha)
+router.post("/", canchaValidationRules, handleValidationErrors, createCancha)
 
 /**
  * @swagger
@@ -171,28 +171,28 @@ router.post('/', canchaValidationRules, handleValidationErrors, createCancha)
  *      summary: Returns one cancha by id
  *      tags: [Canchas]
  *      parameters:
- *          - $ref: '#/components/parameters/canchaId'
+ *          - $ref: "#/components/parameters/canchaId"
  *      responses:
  *        200:
  *          description: requested cancha
  *          content:
  *            application/json:
  *              schema:
- *                  $ref: '#/components/schemas/Cancha'
+ *                  $ref: "#/components/schemas/Cancha"
  *        404:
  *          description: No se encontro la cancha
  *          content:
  *            application/json:
  *              schema:
- *                  $ref: '#/components/schemas/CanchaNotFound'
+ *                  $ref: "#/components/schemas/CanchaNotFound"
  *        500:
  *          description: No hay canchas
  *          content:
  *            application/json:
  *              schema:
- *                $ref: '#/components/schemas/CanchaNotFound'
+ *                $ref: "#/components/schemas/CanchaNotFound"
  */
-router.get('/:id', getOneCancha);
+router.get("/:id", getOneCancha);
 
 // TODO:204 message response
 /**
@@ -202,7 +202,7 @@ router.get('/:id', getOneCancha);
  *      summary: Delete one cancha by id
  *      tags: [Canchas]
  *      parameters:
- *          - $ref: '#/components/parameters/canchaId'
+ *          - $ref: "#/components/parameters/canchaId"
  *      responses:
  *        204:
  *          description: deleted cancha
@@ -213,21 +213,21 @@ router.get('/:id', getOneCancha);
  *                  properties:
  *                      message:
  *                          type: string
- *                          value: 'Cancha deleted'
+ *                          value: "Cancha deleted"
  *        404:
  *          description: No se encontro la cancha
  *          content:
  *            application/json:
  *              schema:
- *                  $ref: '#/components/schemas/CanchaNotFound'
+ *                  $ref: "#/components/schemas/CanchaNotFound"
  *        500:
  *          description: No hay canchas
  *          content:
  *            application/json:
  *              schema:
- *                $ref: '#/components/schemas/CanchaNotFound'
+ *                $ref: "#/components/schemas/CanchaNotFound"
  */
-router.delete('/:id', deleteCancha);
+router.delete("/:id", deleteCancha);
 
 /**
  * @swagger
@@ -236,33 +236,33 @@ router.delete('/:id', deleteCancha);
  *      summary: Update one cancha by id
  *      tags: [Canchas]
  *      parameters:
- *          - $ref: '#/components/parameters/canchaId'
+ *          - $ref: "#/components/parameters/canchaId"
  *      requestBody:
  *        required: true
  *        content:
  *          application/json:
  *            schema:
- *              $ref: '#/components/schemas/Cancha'
+ *              $ref: "#/components/schemas/Cancha"
  *      responses:
  *        200:
  *          description: updated cancha
  *          content:
  *            application/json:
  *              schema:
- *                  $ref: '#/components/schemas/Cancha'
+ *                  $ref: "#/components/schemas/Cancha"
  *        404:
  *          description: No se encontro la cancha
  *          content:
  *            application/json:
  *              schema:
- *                  $ref: '#/components/schemas/CanchaNotFound'
+ *                  $ref: "#/components/schemas/CanchaNotFound"
  *        500:
  *          description: Error del servidor
  *          content:
  *            application/json:
  *              schema:
- *                $ref: '#/components/schemas/CanchaNotFound'
+ *                $ref: "#/components/schemas/CanchaNotFound"
  */
-router.patch('/:id', canchaUpdateValidationRules, handleValidationErrors, updateCancha);
+router.patch("/:id", canchaUpdateValidationRules, handleValidationErrors, updateCancha);
 
 export default router;

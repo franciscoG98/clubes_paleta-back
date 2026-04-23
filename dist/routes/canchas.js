@@ -90,15 +90,15 @@ const router = (0, express_1.Router)();
  *             schema:
  *               type: array
  *               items:
- *                  $ref: '#/components/schemas/Cancha'
+ *                  $ref: "#/components/schemas/Cancha"
  *       500:
  *         description: No hay canchas
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/CanchaNotFound'
+ *               $ref: "#/components/schemas/CanchaNotFound"
  */
-router.get('/', cancha_1.getAllCanchas);
+router.get("/", cancha_1.getAllCanchas);
 /**
  * @swagger
  * /canchas/count:
@@ -118,9 +118,9 @@ router.get('/', cancha_1.getAllCanchas);
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/CanchaNotFound'
+ *               $ref: "#/components/schemas/CanchaNotFound"
  */
-router.get('/count', cancha_1.getCanchasCount);
+router.get("/count", cancha_1.getCanchasCount);
 /**
 * @swagger
 *   /canchas:
@@ -132,22 +132,22 @@ router.get('/count', cancha_1.getCanchasCount);
 *         content:
 *           application/json:
 *             schema:
-*               $ref: '#/components/schemas/Cancha'
+*               $ref: "#/components/schemas/Cancha"
 *         responses:
 *           201:
 *             description: the task was succesfully created
 *             content:
 *               application/json:
 *                 schema:
-*                   $ref: '#/components/schemas/Cancha'
+*                   $ref: "#/components/schemas/Cancha"
 *           500:
 *             description: some server error
 *             content:
 *               application/json:
 *                 schema:
-*                   $ref: '#/components/schemas/CanchaNotFound'
+*                   $ref: "#/components/schemas/CanchaNotFound"
 */
-router.post('/', validate_1.canchaValidationRules, validate_1.handleValidationErrors, cancha_1.createCancha);
+router.post("/", validate_1.canchaValidationRules, validate_1.handleValidationErrors, cancha_1.createCancha);
 /**
  * @swagger
  * /canchas/{id}:
@@ -155,28 +155,28 @@ router.post('/', validate_1.canchaValidationRules, validate_1.handleValidationEr
  *      summary: Returns one cancha by id
  *      tags: [Canchas]
  *      parameters:
- *          - $ref: '#/components/parameters/canchaId'
+ *          - $ref: "#/components/parameters/canchaId"
  *      responses:
  *        200:
  *          description: requested cancha
  *          content:
  *            application/json:
  *              schema:
- *                  $ref: '#/components/schemas/Cancha'
+ *                  $ref: "#/components/schemas/Cancha"
  *        404:
  *          description: No se encontro la cancha
  *          content:
  *            application/json:
  *              schema:
- *                  $ref: '#/components/schemas/CanchaNotFound'
+ *                  $ref: "#/components/schemas/CanchaNotFound"
  *        500:
  *          description: No hay canchas
  *          content:
  *            application/json:
  *              schema:
- *                $ref: '#/components/schemas/CanchaNotFound'
+ *                $ref: "#/components/schemas/CanchaNotFound"
  */
-router.get('/:id', cancha_1.getOneCancha);
+router.get("/:id", cancha_1.getOneCancha);
 // TODO:204 message response
 /**
  * @swagger
@@ -185,7 +185,7 @@ router.get('/:id', cancha_1.getOneCancha);
  *      summary: Delete one cancha by id
  *      tags: [Canchas]
  *      parameters:
- *          - $ref: '#/components/parameters/canchaId'
+ *          - $ref: "#/components/parameters/canchaId"
  *      responses:
  *        204:
  *          description: deleted cancha
@@ -196,21 +196,21 @@ router.get('/:id', cancha_1.getOneCancha);
  *                  properties:
  *                      message:
  *                          type: string
- *                          value: 'Cancha deleted'
+ *                          value: "Cancha deleted"
  *        404:
  *          description: No se encontro la cancha
  *          content:
  *            application/json:
  *              schema:
- *                  $ref: '#/components/schemas/CanchaNotFound'
+ *                  $ref: "#/components/schemas/CanchaNotFound"
  *        500:
  *          description: No hay canchas
  *          content:
  *            application/json:
  *              schema:
- *                $ref: '#/components/schemas/CanchaNotFound'
+ *                $ref: "#/components/schemas/CanchaNotFound"
  */
-router.delete('/:id', cancha_1.deleteCancha);
+router.delete("/:id", cancha_1.deleteCancha);
 /**
  * @swagger
  * /canchas/{id}:
@@ -218,32 +218,32 @@ router.delete('/:id', cancha_1.deleteCancha);
  *      summary: Update one cancha by id
  *      tags: [Canchas]
  *      parameters:
- *          - $ref: '#/components/parameters/canchaId'
+ *          - $ref: "#/components/parameters/canchaId"
  *      requestBody:
  *        required: true
  *        content:
  *          application/json:
  *            schema:
- *              $ref: '#/components/schemas/Cancha'
+ *              $ref: "#/components/schemas/Cancha"
  *      responses:
  *        200:
  *          description: updated cancha
  *          content:
  *            application/json:
  *              schema:
- *                  $ref: '#/components/schemas/Cancha'
+ *                  $ref: "#/components/schemas/Cancha"
  *        404:
  *          description: No se encontro la cancha
  *          content:
  *            application/json:
  *              schema:
- *                  $ref: '#/components/schemas/CanchaNotFound'
+ *                  $ref: "#/components/schemas/CanchaNotFound"
  *        500:
  *          description: Error del servidor
  *          content:
  *            application/json:
  *              schema:
- *                $ref: '#/components/schemas/CanchaNotFound'
+ *                $ref: "#/components/schemas/CanchaNotFound"
  */
-router.patch('/:id', validate_1.canchaUpdateValidationRules, validate_1.handleValidationErrors, cancha_1.updateCancha);
+router.patch("/:id", validate_1.canchaUpdateValidationRules, validate_1.handleValidationErrors, cancha_1.updateCancha);
 exports.default = router;

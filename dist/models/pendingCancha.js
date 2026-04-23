@@ -25,7 +25,7 @@ const initPendingCanchaModel = (sequelize) => {
             allowNull: false,
         },
         type: {
-            type: sequelize_1.DataTypes.ENUM('Trinquete', 'Frontón', 'Cajón'),
+            type: sequelize_1.DataTypes.ENUM("Trinquete", "Frontón", "Cajón"),
             allowNull: false,
         },
         maps_location: {
@@ -47,8 +47,8 @@ const initPendingCanchaModel = (sequelize) => {
         },
     }, {
         sequelize,
-        modelName: 'PendingCancha',
-        tableName: 'pendingCanchas',
+        modelName: "PendingCancha",
+        tableName: "pendingCanchas",
     });
 };
 exports.initPendingCanchaModel = initPendingCanchaModel;

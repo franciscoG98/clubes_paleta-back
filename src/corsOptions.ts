@@ -1,7 +1,7 @@
-import type { CorsOptions } from 'cors';
+import type { CorsOptions } from "cors";
 
 function normalizeOrigin(url: string): string {
-  return url.trim().replace(/\/+$/, '');
+  return url.trim().replace(/\/+$/, "");
 }
 
 /**
@@ -11,7 +11,7 @@ function normalizeOrigin(url: string): string {
  * - In non-production, `http://localhost:3000` is always included for local Next.js
  */
 export function buildCorsAllowlist(): Set<string> {
-  const rawList = process.env.CORS_ORIGINS?.split(',') ?? [];
+  const rawList = process.env.CORS_ORIGINS?.split(",") ?? [];
   const fromEnv = rawList.map(normalizeOrigin).filter(Boolean);
 
   const urls =
@@ -23,8 +23,8 @@ export function buildCorsAllowlist(): Set<string> {
 
   const set = new Set(urls);
 
-  if (process.env.NODE_ENV !== 'production') {
-    set.add('http://localhost:3000');
+  if (process.env.NODE_ENV !== "production") {
+    set.add("http://localhost:3000");
   }
 
   return set;
@@ -43,7 +43,7 @@ export function createCorsOptions(allowed: Set<string>): CorsOptions {
       }
       callback(null, false);
     },
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     credentials: true,
     optionsSuccessStatus: 204,
   };

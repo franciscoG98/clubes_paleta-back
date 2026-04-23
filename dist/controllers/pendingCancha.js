@@ -9,8 +9,8 @@ const multer_1 = __importDefault(require("multer"));
 const cancha_1 = require("../models/cancha");
 const { PendingCancha } = models_1.default;
 // TODO: path in the client
-// const DEFAULT_IMAGE_PATH = '/public/cancha_default.webp';
-const DEFAULT_IMAGE_PATH = '/uploads/cancha_default.webp';
+// const DEFAULT_IMAGE_PATH = "/public/cancha_default.webp";
+const DEFAULT_IMAGE_PATH = "/uploads/cancha_default.webp";
 const storage = multer_1.default.diskStorage({
     destination: "uploads/",
     filename: (req, file, cb) => {
@@ -22,7 +22,7 @@ const getAllPendingCanchas = async (req, res) => {
     try {
         const { pending } = req.query;
         const filters = {};
-        if (typeof pending === 'boolean')
+        if (typeof pending === "boolean")
             filters.pending = pending;
         const pendingCanchas = await PendingCancha.findAll({
             where: filters,
@@ -31,7 +31,7 @@ const getAllPendingCanchas = async (req, res) => {
     }
     catch (error) {
         console.error(error);
-        res.status(500).send('Error fetching pending canchas');
+        res.status(500).send("Error fetching pending canchas");
     }
 };
 exports.getAllPendingCanchas = getAllPendingCanchas;
@@ -53,7 +53,7 @@ const createPendingCancha = async (req, res) => {
     }
     catch (error) {
         console.error(error);
-        res.status(500).send('The cancha could not be created');
+        res.status(500).send("The cancha could not be created");
     }
 };
 exports.createPendingCancha = createPendingCancha;
@@ -90,17 +90,17 @@ const updatePendingCancha = async (req, res) => {
         const { id } = req.params;
         const { pending } = req.body;
         if (!id) {
-            res.status(404).json({ error: 'Cancha no encontrada' });
+            res.status(404).json({ error: "Cancha no encontrada" });
         }
         const updatedCancha = await PendingCancha.update({ pending }, { where: { id: Number(id) } });
         if (updatedCancha[0] === 0) {
-            res.status(404).json({ error: 'No se encontró la cancha o el valor no cambió' });
+            res.status(404).json({ error: "No se encontró la cancha o el valor no cambió" });
         }
-        res.status(200).json({ message: 'Cancha actualizada con éxito' });
+        res.status(200).json({ message: "Cancha actualizada con éxito" });
     }
     catch (error) {
         console.error(error);
-        res.status(500).send('Error updating cancha');
+        res.status(500).send("Error updating cancha");
     }
 };
 exports.updatePendingCancha = updatePendingCancha;
@@ -109,14 +109,14 @@ const deletePendingCancha = async (req, res) => {
         const { id } = req.params;
         const pendingCanchaToRemove = await PendingCancha.destroy({ where: { id } });
         if (!pendingCanchaToRemove) {
-            res.status(404).json({ message: 'Pending cancha not found' });
+            res.status(404).json({ message: "Pending cancha not found" });
             return;
         }
-        res.status(204).json({ message: 'Pending cancha successfully deleted' });
+        res.status(204).json({ message: "Pending cancha successfully deleted" });
     }
     catch (error) {
         console.error(error);
-        res.status(500).send('Error deleting pending cancha');
+        res.status(500).send("Error deleting pending cancha");
     }
 };
 exports.deletePendingCancha = deletePendingCancha;

@@ -1,11 +1,11 @@
-import { Model, DataTypes, Sequelize } from 'sequelize';
+import { Model, DataTypes, Sequelize } from "sequelize";
 
 export class PendingCancha extends Model {
   public id!: number;
   public club!: string;
   public city!: string;
   public state!: string;
-  public type!: 'Trinquete' | 'Frontón' | 'Cajón';
+  public type!: "Trinquete" | "Frontón" | "Cajón";
   public maps_location!: string;
   // TODO: type number???
   public phone!: string;
@@ -34,7 +34,7 @@ export const initPendingCanchaModel = (sequelize: Sequelize) => {
       allowNull: false,
     },
     type: {
-      type: DataTypes.ENUM('Trinquete', 'Frontón', 'Cajón'),
+      type: DataTypes.ENUM("Trinquete", "Frontón", "Cajón"),
       allowNull: false,
     },
     maps_location: {
@@ -60,8 +60,8 @@ export const initPendingCanchaModel = (sequelize: Sequelize) => {
     },
   }, {
     sequelize,
-    modelName: 'PendingCancha',
-    tableName: 'pendingCanchas',
+    modelName: "PendingCancha",
+    tableName: "pendingCanchas",
   });
 };
 

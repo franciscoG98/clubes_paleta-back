@@ -25,7 +25,7 @@ const initCanchaModel = (sequelize) => {
             allowNull: false,
         },
         type: {
-            type: sequelize_1.DataTypes.ENUM('Trinquete', 'Frontón', 'Cajón'),
+            type: sequelize_1.DataTypes.ENUM("Trinquete", "Frontón", "Cajón"),
             allowNull: false,
         },
         maps_location: {
@@ -42,8 +42,8 @@ const initCanchaModel = (sequelize) => {
         },
     }, {
         sequelize,
-        modelName: 'Cancha',
-        tableName: 'canchas',
+        modelName: "Cancha",
+        tableName: "canchas",
     });
 };
 exports.initCanchaModel = initCanchaModel;

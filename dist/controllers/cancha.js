@@ -11,11 +11,11 @@ const getAllCanchas = async (req, res) => {
         // TODO:filter cancha by club name (as query?)
         const { city, state, type } = req.query;
         const filters = {};
-        if (typeof city === 'string')
+        if (typeof city === "string")
             filters.city = city;
-        if (typeof state === 'string')
+        if (typeof state === "string")
             filters.state = state;
-        if (typeof type === 'string' && (type == 'Trinquete' || type == 'Frontón' || type == 'Cajón')) {
+        if (typeof type === "string" && (type == "Trinquete" || type == "Frontón" || type == "Cajón")) {
             filters.type = type;
         }
         const canchas = await Cancha.findAll({
@@ -25,7 +25,7 @@ const getAllCanchas = async (req, res) => {
     }
     catch (error) {
         console.error(error);
-        res.status(500).send('Error fetching canchas');
+        res.status(500).send("Error fetching canchas");
     }
 };
 exports.getAllCanchas = getAllCanchas;
@@ -36,7 +36,7 @@ const getCanchasCount = async (req, res) => {
     }
     catch (error) {
         console.error(error);
-        res.status(500).send('Error fetching canchas');
+        res.status(500).send("Error fetching canchas");
     }
 };
 exports.getCanchasCount = getCanchasCount;
@@ -45,7 +45,7 @@ const createCancha = async (req, res) => {
     const { club, city, state, type, maps_location, phone } = req.body;
     let { image } = req.body;
     if (!image)
-        image = '/uploads/cancha_default.webp';
+        image = "/uploads/cancha_default.webp";
     try {
         const newCancha = await Cancha.create({
             club,
@@ -60,7 +60,7 @@ const createCancha = async (req, res) => {
     }
     catch (error) {
         console.error(error);
-        res.status(500).send('The cancha could not be created');
+        res.status(500).send("The cancha could not be created");
     }
 };
 exports.createCancha = createCancha;
@@ -69,14 +69,14 @@ const getOneCancha = async (req, res) => {
         const { id } = req.params;
         const cancha = await Cancha.findByPk(id);
         if (!cancha) {
-            res.status(404).json({ message: 'Cancha not found' });
+            res.status(404).json({ message: "Cancha not found" });
             return;
         }
         res.json(cancha);
     }
     catch (error) {
         console.error(error);
-        res.status(500).send('Error fetching cancha');
+        res.status(500).send("Error fetching cancha");
     }
 };
 exports.getOneCancha = getOneCancha;
@@ -86,14 +86,14 @@ const deleteCancha = async (req, res) => {
         // TODO: is it ok to use .destroy() method??????
         const canchaToRemove = await Cancha.destroy({ where: { id } });
         if (!canchaToRemove) {
-            res.status(404).json({ message: 'Cancha not found' });
+            res.status(404).json({ message: "Cancha not found" });
             return;
         }
-        res.status(204).json({ message: 'Cancha successfully deleted' });
+        res.status(204).json({ message: "Cancha successfully deleted" });
     }
     catch (error) {
         console.error(error);
-        res.status(500).send('Error fetching cancha');
+        res.status(500).send("Error fetching cancha");
     }
 };
 exports.deleteCancha = deleteCancha;
@@ -103,7 +103,7 @@ const updateCancha = async (req, res) => {
         const updateData = req.body;
         const canchaToEdit = await Cancha.findByPk(id);
         if (!canchaToEdit) {
-            res.status(404).json({ message: 'Cancha not found' });
+            res.status(404).json({ message: "Cancha not found" });
             return;
         }
         await canchaToEdit.update(updateData);
@@ -111,7 +111,7 @@ const updateCancha = async (req, res) => {
     }
     catch (error) {
         console.error(error);
-        res.status(500).send('Error updating cancha');
+        res.status(500).send("Error updating cancha");
     }
 };
 exports.updateCancha = updateCancha;
