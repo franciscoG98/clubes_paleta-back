@@ -21,8 +21,11 @@ export const canchaValidationRules = [
   body("type")
     .isIn(["Trinquete", "Frontón", "Cajón"])
     .withMessage("El tipo debe ser Trinquete, Frontón o Cajón."),
-  body("maps_location").trim().notEmpty().withMessage("La dirección es obligatoria."),
+  body("maps_location").trim().notEmpty().withMessage("El enlace o texto de ubicación en mapas es obligatorio."),
   body("phone")
+    .customSanitizer((v) =>
+      v === undefined || v === null ? "" : String(v).replace(/\D/g, ""),
+    )
     .notEmpty()
     .withMessage("El teléfono es obligatorio.")
     .matches(/^\d{8,15}$/)
@@ -43,9 +46,16 @@ export const canchaUpdateValidationRules = [
     .optional()
     .isIn(["Trinquete", "Frontón", "Cajón"])
     .withMessage("El tipo debe ser Trinquete, Frontón o Cajón."),
-  body("maps_location").optional().trim().notEmpty().withMessage("La dirección no puede estar vacía."),
+  body("maps_location")
+    .optional()
+    .trim()
+    .notEmpty()
+    .withMessage("El enlace o texto de ubicación en mapas no puede estar vacío."),
   body("phone")
     .optional()
+    .customSanitizer((v) =>
+      v === undefined || v === null ? v : String(v).replace(/\D/g, ""),
+    )
     .matches(/^\d{8,15}$/)
     .withMessage("El teléfono debe tener entre 8 y 15 dígitos."),
   body("address")
