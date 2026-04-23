@@ -40,6 +40,10 @@ const initCanchaModel = (sequelize) => {
             type: sequelize_1.DataTypes.STRING,
             allowNull: false,
         },
+        address: {
+            type: sequelize_1.DataTypes.STRING,
+            allowNull: false,
+        },
     }, {
         sequelize,
         modelName: "Cancha",

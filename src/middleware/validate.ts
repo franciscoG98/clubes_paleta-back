@@ -23,7 +23,7 @@ export const canchaValidationRules = [
     .withMessage("El tipo debe ser Trinquete, Frontón o Cajón."),
   body("maps_location").trim().notEmpty().withMessage("El enlace o texto de ubicación en mapas es obligatorio."),
   body("phone")
-    .customSanitizer((v) =>
+    .customSanitizer((v: unknown) =>
       v === undefined || v === null ? "" : String(v).replace(/\D/g, ""),
     )
     .notEmpty()
@@ -53,7 +53,7 @@ export const canchaUpdateValidationRules = [
     .withMessage("El enlace o texto de ubicación en mapas no puede estar vacío."),
   body("phone")
     .optional()
-    .customSanitizer((v) =>
+    .customSanitizer((v: unknown) =>
       v === undefined || v === null ? v : String(v).replace(/\D/g, ""),
     )
     .matches(/^\d{8,15}$/)

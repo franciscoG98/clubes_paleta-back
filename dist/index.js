@@ -15,6 +15,7 @@ const swagger_jsdoc_1 = __importDefault(require("swagger-jsdoc"));
 const swagger_ui_express_1 = require("swagger-ui-express");
 const swaggerOptions_1 = require("./swaggerOptions");
 const corsOptions_1 = require("./corsOptions");
+const ensureAddressColumns_1 = require("./ensureAddressColumns");
 const app = (0, express_1.default)();
 const corsAllowlist = (0, corsOptions_1.buildCorsAllowlist)();
 app.use((0, cors_1.default)((0, corsOptions_1.createCorsOptions)(corsAllowlist)));
@@ -44,6 +45,7 @@ const syncDatabase = async () => {
     try {
         // await (db as any).sequelize.sync({ force: true });
         await models_1.default.sequelize.sync({ force: false });
+        await (0, ensureAddressColumns_1.ensureAddressColumns)(models_1.default.sequelize);
         console.log("\nDatabase successfully synchronized.");
     }
     catch (error) {

@@ -41,6 +41,10 @@ const initPendingCanchaModel = (sequelize) => {
             // allowNull: false,
             allowNull: true,
         },
+        address: {
+            type: sequelize_1.DataTypes.STRING,
+            allowNull: false,
+        },
         pending: {
             type: sequelize_1.DataTypes.BOOLEAN,
             defaultValue: true,

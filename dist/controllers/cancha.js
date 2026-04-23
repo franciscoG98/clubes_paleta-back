@@ -4,12 +4,23 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.updateCancha = exports.deleteCancha = exports.getOneCancha = exports.createCancha = exports.getCanchasCount = exports.getAllCanchas = void 0;
+const sequelize_1 = require("sequelize");
 const models_1 = __importDefault(require("../models"));
+const UPDATABLE_CANCHA_FIELDS = [
+    "club",
+    "city",
+    "state",
+    "type",
+    "maps_location",
+    "phone",
+    "image",
+    "address",
+];
 const { Cancha } = models_1.default;
 const getAllCanchas = async (req, res) => {
     try {
         // TODO:filter cancha by club name (as query?)
-        const { city, state, type } = req.query;
+        const { city, state, type, address } = req.query;
         const filters = {};
         if (typeof city === "string")
             filters.city = city;
@@ -17,6 +28,9 @@ const getAllCanchas = async (req, res) => {
             filters.state = state;
         if (typeof type === "string" && (type == "Trinquete" || type == "Frontón" || type == "Cajón")) {
             filters.type = type;
+        }
+        if (typeof address === "string" && address.trim()) {
+            filters.address = { [sequelize_1.Op.iLike]: `%${address.trim()}%` };
         }
         const canchas = await Cancha.findAll({
             where: filters,
@@ -42,7 +56,7 @@ const getCanchasCount = async (req, res) => {
 exports.getCanchasCount = getCanchasCount;
 // TODO: nanoid to create random uniques ids
 const createCancha = async (req, res) => {
-    const { club, city, state, type, maps_location, phone } = req.body;
+    const { club, city, state, type, maps_location, phone, address } = req.body;
     let { image } = req.body;
     if (!image)
         image = "/uploads/cancha_default.webp";
@@ -54,7 +68,8 @@ const createCancha = async (req, res) => {
             type,
             maps_location,
             phone,
-            image
+            image,
+            address
         });
         res.status(201).json(newCancha);
     }
@@ -100,11 +115,16 @@ exports.deleteCancha = deleteCancha;
 const updateCancha = async (req, res) => {
     try {
         const { id } = req.params;
-        const updateData = req.body;
         const canchaToEdit = await Cancha.findByPk(id);
         if (!canchaToEdit) {
             res.status(404).json({ message: "Cancha not found" });
             return;
+        }
+        const updateData = {};
+        for (const key of UPDATABLE_CANCHA_FIELDS) {
+            if (Object.prototype.hasOwnProperty.call(req.body, key)) {
+                updateData[key] = req.body[key];
+            }
         }
         await canchaToEdit.update(updateData);
         res.status(200).json(canchaToEdit);
